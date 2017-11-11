@@ -7,6 +7,8 @@ export const ADD_BOARD     = '[Boards] AddBoard';
 export const EDIT_BOARD    = '[Boards] EditBoard';
 export const DELETE_BOARD  = '[Boards] DeleteBoard';
 
+export const TEST_EFFECTS  = '[Boards] TEST_EFFECTS';
+
 export class GetBoards implements Action {
     readonly type = GET_BOARDS;
 }
@@ -35,9 +37,16 @@ export class DeleteBoard implements Action {
     constructor(public id : string){}
 }
 
+export class testEffects implements Action {
+    readonly type = TEST_EFFECTS;
+
+    constructor(public val : any){}
+}
+
 export type All
     = GetBoards
     | GetBoard
     | AddBoard
     | EditBoard
-    | DeleteBoard;
+    | DeleteBoard
+    | testEffects;

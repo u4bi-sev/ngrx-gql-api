@@ -34,6 +34,9 @@ export function boardReducer(state = initialState, action : Action){
             });
         case BoardActions.DELETE_BOARD :
             return newState(state, { boards : state.boards.filter(v => v.id !== action.id) } );
+        case BoardActions.TEST_EFFECTS :
+            console.log('[reducer.ts] test effects', action);
+            return state;
         default : state;
     }
 
