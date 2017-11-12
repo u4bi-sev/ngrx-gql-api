@@ -14,11 +14,28 @@ export class BoardEffects {
 
     constructor(private actions$ : Actions, private boardService : BoardService){}
 
-    @Effect() getBoard$ = this.actions$
-        .ofType(BoardActions.GET_BOARD).switchMap((action : Action) => this.boardService.getBoard(action))
-        .map(v => {
-            console.log('[effects.ts] test effects', v);
-            return new BoardActions.testEffects(v)
-        });
+    @Effect() getBoards$ = this.actions$
+        .ofType(BoardActions.GET_BOARDS)
+        .switchMap((action : Action) => this.boardService.getBoards(action))
+        .map(v => new BoardActions.GetBoardsSuccess(v));
 
+    @Effect() getBoard$ = this.actions$
+        .ofType(BoardActions.GET_BOARD)
+        .switchMap((action : Action) => this.boardService.getBoard(action))
+        .map(v => new BoardActions.GetBoardSuccess(v));
+
+    @Effect() addBoard$ = this.actions$
+        .ofType(BoardActions.ADD_BOARD)
+        .switchMap((action : Action) => this.boardService.addBoard(action))
+        .map(v => new BoardActions.AddBoardSuccess(v));
+
+    @Effect() editBoard$ = this.actions$
+        .ofType(BoardActions.EDIT_BOARD)
+        .switchMap((action : Action) => this.boardService.editBoard(action))
+        .map(v => new BoardActions.EditBoardSuccess(v.id, v.board));
+    
+    @Effect() deleteBoard$ = this.actions$
+        .ofType(BoardActions.DELETE_BOARD)
+        .switchMap((action : Action) => this.boardService.deleteBoard(action))
+        .map(v => new BoardActions.DeleteBoardSuccess(v));
 }

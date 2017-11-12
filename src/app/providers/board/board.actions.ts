@@ -7,7 +7,11 @@ export const ADD_BOARD     = '[Boards] AddBoard';
 export const EDIT_BOARD    = '[Boards] EditBoard';
 export const DELETE_BOARD  = '[Boards] DeleteBoard';
 
-export const TEST_EFFECTS  = '[Boards] TEST_EFFECTS';
+export const GET_BOARDS_SUCCESS    = '[Boards] GetBoardsSuccess';
+export const GET_BOARD_SUCCESS     = '[Boards] GetBoardSuccess';
+export const ADD_BOARD_SUCCESS     = '[Boards] AddBoardSuccess';
+export const EDIT_BOARD_SUCCESS    = '[Boards] EditBoardSuccess';
+export const DELETE_BOARD_SUCCESS  = '[Boards] DeleteBoardSuccess';
 
 export class GetBoards implements Action {
     readonly type = GET_BOARDS;
@@ -37,10 +41,34 @@ export class DeleteBoard implements Action {
     constructor(public id : string){}
 }
 
-export class testEffects implements Action {
-    readonly type = TEST_EFFECTS;
+export class GetBoardsSuccess implements Action {
+    readonly type = GET_BOARDS_SUCCESS;
 
-    constructor(public val : any){}
+    constructor(public boards: BoardModel[]){}
+}
+
+export class GetBoardSuccess implements Action {
+    readonly type = GET_BOARD_SUCCESS;
+
+    constructor(public board: BoardModel){}
+}
+
+export class AddBoardSuccess implements Action {
+    readonly type = ADD_BOARD_SUCCESS;
+
+    constructor(public board: BoardModel){}
+}
+
+export class EditBoardSuccess implements Action {
+    readonly type = EDIT_BOARD_SUCCESS;
+
+    constructor(public id : string, public board: BoardModel){}
+}
+
+export class DeleteBoardSuccess implements Action {
+    readonly type = DELETE_BOARD_SUCCESS;
+
+    constructor(public id : string){}
 }
 
 export type All
@@ -49,4 +77,8 @@ export type All
     | AddBoard
     | EditBoard
     | DeleteBoard
-    | testEffects;
+    | GetBoardsSuccess
+    | GetBoardSuccess
+    | AddBoardSuccess
+    | EditBoardSuccess
+    | DeleteBoardSuccess;

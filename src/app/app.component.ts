@@ -26,8 +26,8 @@ export class AppComponent {
     constructor(private store : Store<AppState>){
         this.board$ = this.store.select('board');
         this.board$.subscribe(e => {
-            // console.log(e);
             if(e){
+                // console.log(e);
                 this.board = e.board;
                 this.boards = e.boards;
             }

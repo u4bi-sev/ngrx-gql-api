@@ -5,6 +5,7 @@ import { Board }          from './board';
 export type Action = BoardActions.All;
 
 const initialState = {
+    pending: false,
     boards : [],
     board : {}
 };
@@ -16,13 +17,24 @@ export function boardReducer(state = initialState, action : Action){
 
     switch(action.type){
         case BoardActions.GET_BOARDS   :
-            let board = new Board({ title : 'title'});
-            return newState(state, { boards : [ board, board, board ] });
-        case BoardActions.GET_BOARD    : return newState(state, { board : new Board({ id : action.id }) });
+            return newState(state, { pending: true });
+        case BoardActions.GET_BOARD    :
+            return newState(state, { pending: true });
         case BoardActions.ADD_BOARD    :
-            state.boards.push(action.board);
-            return newState(state, { boards : state.boards } );
+            return newState(state, { pending: true } );
         case BoardActions.EDIT_BOARD   :
+            return newState(state, { pending: true } );
+        case BoardActions.DELETE_BOARD :
+            return newState(state, { pending: true } );
+        case BoardActions.GET_BOARDS_SUCCESS :
+            return newState(state, { pending: false, boards : action.boards });
+        case BoardActions.GET_BOARD_SUCCESS :
+            return newState(state, { pending: false, board : action.board });
+        case BoardActions.ADD_BOARD_SUCCESS :
+            state.boards.push(action.board);
+            return newState(state, { pending: false, boards : state.boards } );
+        case BoardActions.EDIT_BOARD_SUCCESS :
+            state.pending = false;
             return newState(state, { boards : state.boards.map(v => {
                 if(v.id === action.id ) return Object.assign({}, v, {
                    writer : action.board.writer || v.writer,
@@ -32,11 +44,9 @@ export function boardReducer(state = initialState, action : Action){
                     return v;
                 })
             });
-        case BoardActions.DELETE_BOARD :
+        case BoardActions.DELETE_BOARD_SUCCESS :
+            state.pending = false;
             return newState(state, { boards : state.boards.filter(v => v.id !== action.id) } );
-        case BoardActions.TEST_EFFECTS :
-            console.log('[reducer.ts] test effects', action);
-            return state;
         default : state;
     }
 
