@@ -4,3 +4,11 @@ export interface BoardModel{
     title?   : string;
     content? : string;
 }
+
+export interface BoardServiceModel{
+    getBoards();
+    getBoard( id : string);
+    addBoard( board : BoardModel);
+    editBoard( id : string, board : BoardModel);
+    deleteBoard( id : string);
+}

@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { Board } from './board';
+import { BoardModel, BoardServiceModel } from './board.model';
 
 @Injectable()
-export class BoardService {
+export class BoardService implements BoardServiceModel{
 
-    getBoards(action){
-        // console.log(action);
+    getBoards(){
 
         let data = (id) => new Board({ 
                 id : id,
@@ -21,40 +21,30 @@ export class BoardService {
         return Observable.of(arr); // ajax
     }
 
-    getBoard(action){
-        // console.log(action);
+    getBoard(id : string){
 
         let data = new Board({ 
-                id : action.id,
-                writer : 'get writer ' + action.id,
-                title : 'get title ' + action.id,
-                content : 'get board ' + action.id
+                id : id,
+                writer : 'get writer ' + id,
+                title : 'get title ' + id,
+                content : 'get board ' + id
             });
 
         return Observable.of(data); // ajax
     }
 
-    addBoard(action){
-        // console.log(action);
-
-        let data = action.board;
+    addBoard(board : BoardModel){
+        let data = board;
         return Observable.of(data); // ajax
     }
 
-    editBoard(action){
-        // console.log(action);
-
-        let data = {
-            id : action.id,
-            board : action.board
-        };
+    editBoard(id : string, board : BoardModel){
+        let data = { id, board };
         return Observable.of(data); // ajax
     }
     
-    deleteBoard(action){
-        // console.log(action);
-        
-        let data = action.id
+    deleteBoard(id : string){
+        let data = id;
         return Observable.of(data); // ajax
     }
 }
