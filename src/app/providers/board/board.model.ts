@@ -1,5 +1,5 @@
 export interface BoardModel{
-    id?     : string;
+    id?     : string | number;
     writer?  : string;
     title?   : string;
     content? : string;
@@ -7,8 +7,8 @@ export interface BoardModel{
 
 export interface BoardServiceModel{
     getBoards();
-    getBoard( id : string);
+    getBoard( id : string | number);
     addBoard( board : BoardModel);
-    editBoard( id : string, board : BoardModel);
-    deleteBoard( id : string);
+    editBoard( id : string | number, board : BoardModel);
+    deleteBoard( id : string | number);
 }
