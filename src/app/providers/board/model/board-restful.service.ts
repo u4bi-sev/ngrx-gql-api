@@ -5,9 +5,15 @@ import { BoardModel, BoardServiceModel } from '../board.model';
 
 @Injectable()
 export class BoardRESTfulService implements BoardServiceModel{
+    
+    private url : string;
 
+    constructor(url : string){
+        this.url = url;
+    }
+    
     getBoards = () => Observable.ajax({
-        url : 'http://localhost:7778/board',
+        url : this.url,
         method : 'GET',
         crossDomain : true
     })
@@ -16,7 +22,7 @@ export class BoardRESTfulService implements BoardServiceModel{
 
 
     getBoard = (id : string | number) => Observable.ajax({
-        url : 'http://localhost:7778/board/' + id,
+        url : this.url + id,
         method : 'GET',
         crossDomain : true
     })
@@ -25,7 +31,7 @@ export class BoardRESTfulService implements BoardServiceModel{
 
 
     addBoard = (board : BoardModel) => Observable.ajax({
-        url : 'http://localhost:7778/board',
+        url : this.url,
         method : 'POST',
         crossDomain : true,
         headers: { 'Content-Type': 'application/json' },
@@ -36,7 +42,7 @@ export class BoardRESTfulService implements BoardServiceModel{
 
 
     editBoard = (id : string | number, board : BoardModel) => Observable.ajax({
-        url : 'http://localhost:7778/board/' + id,
+        url : this.url + id,
         method : 'PUT',
         crossDomain : true,
         headers: { 'Content-Type': 'application/json' },
@@ -47,7 +53,7 @@ export class BoardRESTfulService implements BoardServiceModel{
 
     
     deleteBoard = (id : string | number) => Observable.ajax({
-        url : 'http://localhost:7778/board/' + id,
+        url : this.url + id,
         method : 'DELETE',
         crossDomain : true
     })

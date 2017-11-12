@@ -3,7 +3,7 @@ const expressGraphQL = require('express-graphql');
 const axios = require('axios');
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLList, GraphQLNonNull } = require('graphql');
 
-const API_URL = 'http://localhost:7778/board/';
+const API_URL = 'http://localhost:7779/board/';
 
 const BoardsType = new GraphQLObjectType({
     name : 'Boards',
@@ -99,7 +99,7 @@ app.use('/graphql', expressGraphQL({
     graphiql : true
 }));
 
-const server = app.listen(7779, () => console.log('GraphQL server on port ' + server.address().port));
+const server = app.listen(7778, () => console.log('GraphQL server on port ' + server.address().port));
 
 
 

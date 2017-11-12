@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 /* GraphQL */
 import { HttpClientModule } from '@angular/common/http';
@@ -29,7 +30,9 @@ import { AppComponent } from './app.component';
       board : boardReducer
     }),
     EffectsModule.forRoot([BoardEffects]),
-    
+    StoreDevtoolsModule.instrument({
+      maxAge: 10
+    }),
     /* GraphQL */
     HttpClientModule,
     ApolloModule,

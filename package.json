@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "server:restful": "json-server --watch _RESTful-server/db.json --port 7778",
+    "server:restful": "json-server --watch _RESTful-server/db.json --port 7779",
     "server:graphql": "node _GraphQL-server/app.js",
     "start": "ng serve --host 0.0.0.0 --port 7777",
     "build": "ng build",
@@ -25,6 +25,7 @@
     "@angular/router": "^5.0.0",
     "@ngrx/effects": "^4.1.1",
     "@ngrx/store": "^4.1.1",
+    "@ngrx/store-devtools": "^4.1.1",
     "apollo-angular": "^1.0.0-beta.2",
     "apollo-angular-link-http": "^1.0.0-beta.5",
     "apollo-cache-inmemory": "^1.1.0",

@@ -11,9 +11,9 @@ import { BoardGraphQLService } from './model/board-graphql.service';
 export class BoardService implements BoardServiceModel{
 
     constructor(
-        // private boardRESTfulService : BoardRESTfulService
+        // private boardRESTfulService : BoardRESTfulService('http://localhost:7779/board/')
         private boardGraphQLService : BoardGraphQLService
-    ){ }
+    ){}
 
 
     /* RESTFul */
