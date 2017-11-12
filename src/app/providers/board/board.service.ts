@@ -4,47 +4,21 @@ import { Observable } from 'rxjs/Rx';
 import { Board } from './board';
 import { BoardModel, BoardServiceModel } from './board.model';
 
+import { BoardRESTfulService } from './model/board-restful.service';
+
 @Injectable()
 export class BoardService implements BoardServiceModel{
 
-    getBoards(){
+    constructor(private boardRESTfulService : BoardRESTfulService){ }
 
-        let data = (id) => new Board({ 
-                id : id,
-                writer : 'get writer ' + id,
-                title : 'get title ' + id,
-                content : 'get board ' + id
-            });
-
-        let arr = [data(0), data(1), data(2)];
-
-        return Observable.of(arr); // ajax
-    }
-
-    getBoard(id : string){
-
-        let data = new Board({ 
-                id : id,
-                writer : 'get writer ' + id,
-                title : 'get title ' + id,
-                content : 'get board ' + id
-            });
-
-        return Observable.of(data); // ajax
-    }
-
-    addBoard(board : BoardModel){
-        let data = board;
-        return Observable.of(data); // ajax
-    }
-
-    editBoard(id : string, board : BoardModel){
-        let data = { id, board };
-        return Observable.of(data); // ajax
-    }
+    getBoards = () => this.boardRESTfulService.getBoards();
     
-    deleteBoard(id : string){
-        let data = id;
-        return Observable.of(data); // ajax
-    }
+    getBoard = (id : string | number) => this.boardRESTfulService.getBoard(id);
+    
+    addBoard = (board : BoardModel) => this.boardRESTfulService.addBoard(board);
+    
+    editBoard = (id : string | number, board : BoardModel) => this.boardRESTfulService.editBoard(id, board);
+    
+    deleteBoard = (id : string | number) => this.boardRESTfulService.deleteBoard(id);
+
 }

@@ -32,10 +32,10 @@ export class BoardEffects {
     @Effect() editBoard$ = this.actions$
         .ofType(BoardActions.EDIT_BOARD)
         .switchMap((action : any) => this.boardService.editBoard(action.id, action.board))
-        .map(v => new BoardActions.EditBoardSuccess(v.id, v.board));
+        .map( (v : any) => new BoardActions.EditBoardSuccess(v.id, { ...v }));
     
     @Effect() deleteBoard$ = this.actions$
         .ofType(BoardActions.DELETE_BOARD)
         .switchMap((action : any) => this.boardService.deleteBoard(action.id))
-        .map(v => new BoardActions.DeleteBoardSuccess(v));
+        .map( (v : any) => new BoardActions.DeleteBoardSuccess(v));
 }

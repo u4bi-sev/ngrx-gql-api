@@ -20,7 +20,7 @@ export class GetBoards implements Action {
 export class GetBoard implements Action {
     readonly type = GET_BOARD;
 
-    constructor(public id: string){}
+    constructor(public id: string | number){}
 }
 
 export class AddBoard implements Action {
@@ -32,13 +32,13 @@ export class AddBoard implements Action {
 export class EditBoard implements Action {
     readonly type = EDIT_BOARD;
 
-    constructor(public id : string, public board: BoardModel){}
+    constructor(public id : string | number, public board: BoardModel){}
 }
 
 export class DeleteBoard implements Action {
     readonly type = DELETE_BOARD;
 
-    constructor(public id : string){}
+    constructor(public id : string | number){}
 }
 
 export class GetBoardsSuccess implements Action {
@@ -62,13 +62,13 @@ export class AddBoardSuccess implements Action {
 export class EditBoardSuccess implements Action {
     readonly type = EDIT_BOARD_SUCCESS;
 
-    constructor(public id : string, public board: BoardModel){}
+    constructor(public id : string | number, public board: BoardModel){}
 }
 
 export class DeleteBoardSuccess implements Action {
     readonly type = DELETE_BOARD_SUCCESS;
 
-    constructor(public id : string){}
+    constructor(public id : string | number){}
 }
 
 export type All

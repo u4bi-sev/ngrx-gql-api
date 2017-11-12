@@ -34,25 +34,19 @@ export class AppComponent {
         });
 
         this.getBoards();
-        this.getBoard('test');
-
-        // this.addBoard( new Board({ id : '0000', title   : 'asdf'}));
-
-        // this.editBoard('0000', new Board({ title : 'edit' }));
-
-        // this.deleteBoard('0000');
+        this.getBoard(1);
 
     }
 
-    add = () => this.addBoard( new Board({ id : '0000', title   : 'asdf'}));
-    edit = () => this.editBoard('0000', new Board({ title : 'edit' }));
-    del =  () =>  this.deleteBoard('0000');
+    add = () => this.addBoard( new Board({ writer : 'add writer', title   : 'add title', content : 'add content' }));
+    edit = () => this.editBoard(4, new Board({ title : 'edit' }));
+    del =  () =>  this.deleteBoard(4);
 
     getBoards(){
         this.store.dispatch(new BoardActions.GetBoards());
     }
 
-    getBoard(id : string){
+    getBoard(id : string | number){
         this.store.dispatch(new BoardActions.GetBoard(id));
     }
 
@@ -60,11 +54,14 @@ export class AppComponent {
         this.store.dispatch(new BoardActions.AddBoard(board));
     }
 
-    editBoard(id : string, board : BoardModel){
+    editBoard(id : string | number, board : BoardModel){
+        
+        this.boards.filter(a => a.id === id).map(v => Object.keys(board).filter(e => board[e] === '' ).map(e => board[e] = v[e]) );
+        
         this.store.dispatch(new BoardActions.EditBoard(id, board));
     }
 
-    deleteBoard(id : string){
+    deleteBoard(id : string | number){
         this.store.dispatch(new BoardActions.DeleteBoard(id));
     }    
 }

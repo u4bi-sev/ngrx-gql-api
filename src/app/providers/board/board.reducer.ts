@@ -35,15 +35,8 @@ export function boardReducer(state = initialState, action : Action){
             return newState(state, { pending: false, boards : state.boards } );
         case BoardActions.EDIT_BOARD_SUCCESS :
             state.pending = false;
-            return newState(state, { boards : state.boards.map(v => {
-                if(v.id === action.id ) return Object.assign({}, v, {
-                   writer : action.board.writer || v.writer,
-                   title : action.board.title || v.title,
-                   content : action.board.content || v.content
-                });
-                    return v;
-                })
-            });
+            state.boards.filter(v => v.id === action.id).map( (e, index) => Object.keys(e).map(v => e[v] = action.board[v]) );
+            return newState(state, { pending: false, boards : state.boards });
         case BoardActions.DELETE_BOARD_SUCCESS :
             state.pending = false;
             return newState(state, { boards : state.boards.filter(v => v.id !== action.id) } );

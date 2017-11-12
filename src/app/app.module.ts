@@ -7,6 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { boardReducer } from './providers/board/board.reducer';
 import { BoardEffects } from './providers/board/board.effects';
 import { BoardService } from './providers/board/board.service';
+import { BoardRESTfulService } from './providers/board/model/board-restful.service';
 
 import { AppComponent } from './app.component';
 
@@ -21,7 +22,7 @@ import { AppComponent } from './app.component';
     }),
     EffectsModule.forRoot([BoardEffects]),
   ],
-  providers: [BoardService],
+  providers: [BoardService, BoardRESTfulService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
